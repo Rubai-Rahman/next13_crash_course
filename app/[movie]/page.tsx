@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const page = async ({ params }: any) => {
+const page = async ({ params }: { params: { movie: any } }) => {
   const { movie } = params;
 
   const imagePath = 'https://image.tmdb.org/t/p/original';
@@ -8,7 +8,7 @@ const page = async ({ params }: any) => {
     `https://api.themoviedb.org/3/movie/${movie}?api_key=${process.env.API_KEY}`
   );
   const res = await data.json();
-  
+  console.log('hello', res);
   return (
     <div>
       <div>
@@ -26,6 +26,7 @@ const page = async ({ params }: any) => {
           alt="Image "
           priority
         />
+        <p>{res.overview}</p>
       </div>
     </div>
   );
